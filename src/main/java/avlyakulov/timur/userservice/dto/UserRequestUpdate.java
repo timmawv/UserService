@@ -3,7 +3,8 @@ package avlyakulov.timur.userservice.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,23 +14,17 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class UserRequest {
+@NoArgsConstructor
+public class UserRequestUpdate {
 
-    @NotNull(message = "Email is required field, please enter email")
     @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Your email isn't valid, please enter valid email")
     private String email;
 
-    @NotNull(message = "First name is required field, please enter first name")
-    @NotBlank(message = "Your name can't be blank enter valid name")
     private String firstName;
 
-    @NotNull(message = "Last name is required field, please enter last name")
-    @NotBlank(message = "Your last name can't be blank enter valid last name")
     private String lastName;
 
-    @NotNull(message = "Birth date is required field, please enter birth date")
     @Past(message = "Birth date must be in the past")
     @JsonFormat(pattern = "dd.MM.yyyy")
     @JsonDeserialize(using = LocalDateDeserializer.class)

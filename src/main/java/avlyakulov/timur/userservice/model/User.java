@@ -1,15 +1,15 @@
 package avlyakulov.timur.userservice.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
 public class User {
-
-    private Integer id;
 
     private String email;
 

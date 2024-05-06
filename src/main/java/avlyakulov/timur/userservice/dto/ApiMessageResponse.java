@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ApiMessage {
+public class ApiMessageResponse {
 
     private String message;
 }
