@@ -1,3 +1,6 @@
 spring:
   application:
     name: UserService
+user:
+  register:
+    age: 18
