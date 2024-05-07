@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "861f46cb-62aa-48b5-81aa-19ce078b8429",
+		"name": "users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29613522"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"dima@gmail.com\",\r\n    \"firstName\" : \"dima\",\r\n    \"lastName\" : \"Bevj\",\r\n    \"birthDate\" : \"20.10.2005\",\r\n    \"address\" : \"c.Kiev\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/users"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"from\" : \"05.05.2000\",\r\n    \"to\" : \"10.02.2024\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/users"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/users/dima@gmail.com",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/users/dima@gmail.com"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/users/dima@gmail.com",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"dima@gmail.com\",\r\n    \"firstName\" : \"dima\",\r\n    \"lastName\" : \"Bevj\",\r\n    \"birthDate2\" : \"02.03.2005\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/users/dima@gmail.com"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/users/dima@gmail.com",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"address\" : \"c. Kiev\",\r\n    \"phoneNumber\" : \"+380668951851\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/users/dima@gmail.com"
+			},
+			"response": []
+		}
+	]
+}
