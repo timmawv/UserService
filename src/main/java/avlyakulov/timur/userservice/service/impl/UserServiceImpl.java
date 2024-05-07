@@ -31,25 +31,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
-        Optional<User> userOptional = userRepository.findByEmail(user.getEmail());
-        if (userOptional.isPresent())
-            throw new UserEmailAlreadyExistException("User with such email already exist");
-        return userRepository.createUser(user);
+        try {
+            userRepository.findByEmail(user.getEmail());
+            throw new UserEmailAlreadyExistException("user with such email already exists");
+        } catch (UserNotFoundException e) {
+            return userRepository.createUser(user);
+        }
     }
 
     @Override
     public User updateUser(String email, UserRequestUpdate updatedUser) {
-        Optional<User> userOptional = userRepository.findByEmail(email);
-        if (userOptional.isEmpty())
-            throw new UserNotFoundException("User with such email doesn't exists");
-
-        User user = userOptional.get();
+        User user = userRepository.findByEmail(email);
 
         if (updatedUser.getEmail() != null) {
-            Optional<User> updatedUserEmail = userRepository.findByEmail(updatedUser.getEmail());
-            if (updatedUserEmail.isPresent())
+            try {
+                userRepository.findByEmail(updatedUser.getEmail());
                 throw new UserEmailAlreadyExistException("User with such email already exist");
-            user.setEmail(updatedUser.getEmail());
+            } catch (UserNotFoundException e) {
+                user.setEmail(updatedUser.getEmail());
+            }
         }
 
         if (updatedUser.getFirstName() != null) {
@@ -76,17 +76,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateAllUserFields(String email, User updatedUser) {
-        Optional<User> userOptional = userRepository.findByEmail(email);
-        if (userOptional.isEmpty())
-            throw new UserNotFoundException("User with such email doesn't exists");
+        userRepository.findByEmail(email);
+
         return userRepository.updateUser(email, updatedUser);
     }
 
     @Override
     public void deleteUser(String email) {
-        Optional<User> userOptional = userRepository.findByEmail(email);
-        if (userOptional.isEmpty())
-            throw new UserNotFoundException("User with such email doesn't exists");
+        userRepository.findByEmail(email);
+
         userRepository.deleteUser(email);
     }
 

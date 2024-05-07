@@ -31,4 +31,3 @@ Then build project to jar<br>
 `mvn clean package -Dmaven.test.skip`<br>
 After packaging project you can launch it <br>
 `java -jar target/UserService-0.0.1-SNAPSHOT.jar`
-

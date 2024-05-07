@@ -1,5 +1,7 @@
 package avlyakulov.timur.userservice.repository;
 
+import avlyakulov.timur.userservice.exception.UserEmailAlreadyExistException;
+import avlyakulov.timur.userservice.exception.UserNotFoundException;
 import avlyakulov.timur.userservice.model.User;
 import org.springframework.stereotype.Repository;
 
@@ -16,10 +18,11 @@ public class UserRepository {
         return users;
     }
 
-    public Optional<User> findByEmail(String email) {
+    public User findByEmail(String email) {
         return users.stream()
                 .filter(u -> u.getEmail().equals(email))
-                .findFirst();
+                .findFirst()
+                .orElseThrow(() -> new UserNotFoundException("User with such email doesn't exists"));
     }
 
 
