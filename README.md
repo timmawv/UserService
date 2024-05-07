@@ -4,6 +4,9 @@
 
 Task is to app which creates user entities from json, and we can do crud operations.
 
+## Postman collection for testing
+[Open postman collection](postman_test_collection/users.postman_collection.json)
+
 ## Used Technologies
 
 * Spring Boot
@@ -29,5 +32,3 @@ Then build project to jar<br>
 After packaging project you can launch it <br>
 `java -jar target/UserService-0.0.1-SNAPSHOT.jar`
 
-## Postman collection for testing
-[Open postman collection](postman_test_collection/users.postman_collection.json)
