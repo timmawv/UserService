@@ -30,11 +30,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createUser(User user) {
+    public User createUser(User user) {
         Optional<User> userOptional = userRepository.findByEmail(user.getEmail());
         if (userOptional.isPresent())
             throw new UserEmailAlreadyExistException("User with such email already exist");
-        userRepository.createUser(user);
+        return userRepository.createUser(user);
     }
 
     @Override
@@ -71,8 +71,7 @@ public class UserServiceImpl implements UserService {
         if (updatedUser.getPhoneNumber() != null) {
             user.setPhoneNumber(updatedUser.getPhoneNumber());
         }
-        userRepository.updateUser(email, user);
-        return user;
+        return userRepository.updateUser(email, user);
     }
 
     @Override
@@ -80,8 +79,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> userOptional = userRepository.findByEmail(email);
         if (userOptional.isEmpty())
             throw new UserNotFoundException("User with such email doesn't exists");
-        userRepository.updateUser(email, updatedUser);
-        return updatedUser;
+        return userRepository.updateUser(email, updatedUser);
     }
 
     @Override

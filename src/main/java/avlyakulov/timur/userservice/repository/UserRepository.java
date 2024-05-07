@@ -23,12 +23,19 @@ public class UserRepository {
     }
 
 
-    public void createUser(User user) {
+    public User createUser(User user) {
         users.add(user);
+        return user;
     }
 
-    public void updateUser(String email, User user) {
-
+    public User updateUser(String email, User user) {
+        int counter = 0;
+        for (User userIterate : users) {
+            if (userIterate.getEmail().equals(email))
+                users.set(counter, user);
+            ++counter;
+        }
+        return user;
     }
 
     public void deleteUser(String email) {

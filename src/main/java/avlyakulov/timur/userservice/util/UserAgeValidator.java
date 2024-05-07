@@ -16,13 +16,12 @@ public class UserAgeValidator {
     private int minUserAgeRegister;
 
     public void validateUserAge(UserRequest user) {
-        if (user.getBirthDate() != null) {
-            LocalDate birthDate = user.getBirthDate();
+        LocalDate birthDate = user.getBirthDate();
 
-            if (calculateAge(birthDate) < minUserAgeRegister) {
-                throw new UserAgeNotValidException("You can't create/update user with age less than " + minUserAgeRegister);
-            }
-        }
+        if (calculateAge(birthDate) < minUserAgeRegister)
+            throw new UserAgeNotValidException("You can't create or update user with age less than " + minUserAgeRegister);
+
+
     }
 
     public void validateUserAge(UserRequestUpdate user) {

@@ -11,8 +11,9 @@ import avlyakulov.timur.userservice.util.UserAgeValidator;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -35,8 +36,8 @@ public class UserController {
     public ResponseEntity<?> createUser(@RequestBody @Valid UserRequest userRequest) {
         userAgeValidator.validateUserAge(userRequest);
         User user = userMapper.mapUserRequestToUser(userRequest);
-        userService.createUser(user);
-        return ResponseEntity.ok(userRequest);
+        User userCreated = userService.createUser(user);
+        return ResponseEntity.ok(userCreated);
     }
 
     @GetMapping
@@ -44,27 +45,28 @@ public class UserController {
         if (birthDateRange == null)
             return ResponseEntity.ok(userService.findAll());
 
-        return ResponseEntity.ok(userService.findUsersByRangeDates(birthDateRange));
+        List<User> users = userService.findUsersByRangeDates(birthDateRange);
+        return ResponseEntity.ok(userMapper.mapUserListToUserResponseList(users));
     }
 
     @DeleteMapping("/{email}")
-    public ResponseEntity<?> deleteUser(@PathVariable String email) {
+    public ResponseEntity<?> deleteUser(@PathVariable("email") String email) {
         userService.deleteUser(email);
         return ResponseEntity.ok(new ApiMessageResponse("User was deleted"));
     }
 
     @PatchMapping("/{email}")
-    public ResponseEntity<?> updateSomeUserFields(@RequestBody @Valid UserRequestUpdate userRequestUpdate, @PathVariable String email) {
+    public ResponseEntity<?> updateSomeUserFields(@RequestBody @Valid UserRequestUpdate userRequestUpdate, @PathVariable("email") String email) {
         userAgeValidator.validateUserAge(userRequestUpdate);
         User updatedUser = userService.updateUser(email, userRequestUpdate);
-        return ResponseEntity.ok(updatedUser);
+        return ResponseEntity.ok(userMapper.mapUserToUserResponse(updatedUser));
     }
 
     @PutMapping(value = "/{email}")
-    public ResponseEntity<?> updateAllUserFields(@RequestBody @Valid UserRequest userRequest, @PathVariable String email) {
+    public ResponseEntity<?> updateAllUserFields(@RequestBody @Valid UserRequest userRequest, @PathVariable("email") String email) {
         userAgeValidator.validateUserAge(userRequest);
         User user = userMapper.mapUserRequestToUser(userRequest);
         User updatedUser = userService.updateAllUserFields(email, user);
-        return ResponseEntity.ok(updatedUser);
+        return ResponseEntity.ok(userMapper.mapUserToUserResponse(updatedUser));
     }
 }

@@ -23,10 +23,12 @@ public class UserRequest {
 
     @NotNull(message = "First name is required field, please enter first name")
     @NotBlank(message = "Your name can't be blank enter valid name")
+    @Size(min = 2, message = "Your first name is too short, enter valid first name")
     private String firstName;
 
     @NotNull(message = "Last name is required field, please enter last name")
     @NotBlank(message = "Your last name can't be blank enter valid last name")
+    @Size(min = 2, message = "Your last name is too short, enter valid last name")
     private String lastName;
 
     @NotNull(message = "Birth date is required field, please enter birth date")
@@ -35,6 +37,7 @@ public class UserRequest {
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate birthDate;
 
+    @Size(min = 4, message = "Your address is too short, enter valid address")
     private String address;
 
     @Pattern(regexp = "^\\+?3?8?(0\\d{9})$", message = "your phone number doesn't match +380 or 099 format")

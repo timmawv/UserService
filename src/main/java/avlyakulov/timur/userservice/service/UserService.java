@@ -11,7 +11,7 @@ public interface UserService {
 
     List<User> findAll();
 
-    void createUser(User user);
+    User createUser(User user);
 
     User updateUser(String email, UserRequestUpdate userUpdated);
 
